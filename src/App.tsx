@@ -1,0 +1,545 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { 
+  Github, 
+  Linkedin, 
+  Mail, 
+  ChevronRight, 
+  X, 
+  ExternalLink,
+  Database,
+  BarChart,
+  BrainCircuit,
+  PieChart,
+  MessageSquare,
+  Lightbulb,
+  Presentation,
+  Users,
+  ArrowUp,
+  FileText
+} from 'lucide-react';
+
+// --- Data ---
+const projects = [
+  {
+    id: 1,
+    title: "Market Basket Analysis",
+    summary: "Association rule analysis on bakery transactions to uncover cross-selling opportunities and increase basket size.",
+    image: "/project1.jpg",
+    tags: ["Python", "Tableau", "Market Basket Analysis"],
+    githubUrl: "https://github.com/pravadipta/market-basket-analysis",
+    deckUrl: "https://drive.google.com/file/d/1ggkw9-iwKb1TvtoEZiLg41t6mMec6720/view?usp=drive_link",
+    tableauUrl: 'https://public.tableau.com/views/TheBreadBasketMBADashboard/BasketGrowthOpportunityDashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link',
+    details: {
+      businessContext: "A retail bakery recorded high transaction volume but low basket depth, with an average of ~2 items per purchase and 41.7% single-item transactions, limiting average order value.",
+      objective: "Identify product combinations that can increase basket size and reduce single-item purchases.",
+      data: "9,465 retail bakery transactions across 94 bakery products.",
+      approach: "Exploratory data analysis and market basket analysis (Apriori) using Python to identify product associations based on support, confidence, and lift.",
+      keyInsights: "Food items such as toast and medialuna frequently trigger coffee add-ons, while beverage-and-dessert combinations appear more often during weekend visits.",
+      businessRecommendations: "Promote weekday food-to-coffee add-ons and introduce optional beverage-and-dessert bundles on weekends to increase basket depth."
+    }
+  },
+  {
+    id: 2,
+    title: "Personal Expense Dashboard",
+    summary: "Interactive dashboard analyzing personal spending patterns, budget utilization, and transaction behavior to support better financial decision-making.",
+    image: "project2.jpg",
+    tags: ["Tableau", "Data Visualization", "Dashboard Design"],
+    githubUrl: "https://github.com/pravadipta/personal-expense-dashboard",
+    deckUrl: "https://drive.google.com/file/d/10vU7vlpPu4BpFoJT2GONuNoFShSPQ0Dn/view?usp=drive_link",
+    tableauUrl: "https://public.tableau.com/shared/MJNPBCDYY?:display_count=n&:origin=viz_share_link",
+    details: {
+      businessContext: "RevoFinance is a fintech platform that helps users track personal expenses across online and offline merchants. However, raw transaction data alone does not clearly reveal spending patterns or budget performance.",
+      objective: "Design an interactive dashboard that helps users understand spending behavior, monitor budget utilization, and identify opportunities to improve financial management.",
+      data: "Transaction-level expense data, merchant metadata, and category-level annual budgets.",
+      approach: "Built an interactive Tableau dashboard combining spending metrics, category breakdowns, budget comparisons, and time-based trend analysis.",
+      keyInsights: "Several non-essential categories such as travel, subscriptions, and entertainment exceed their allocated budgets (~111% utilization), indicating recurring overspending risks.",
+      businessRecommendations: "Introduce category-based alerts and forward-looking spending projections to help users detect overspending early and adjust financial behavior."
+    }
+  },
+  {
+    id: 3,
+    title: "Customer Segmentation Analysis",
+    summary: "K-means clustering analysis on credit card customer data to identify high-value user segments and guide revenue growth strategies.",
+    image: "project3.jpg",
+    tags: ["Python", "K-Means Clustering", "Customer Segmentation", "Financial Analysis"],
+    githubUrl: "https://github.com/pravadipta/customer-segmentation-analysis",
+    deckUrl: "https://drive.google.com/file/d/1Gnv0nDU-_aGQssHfCjVPv77IWCyrEF3W/view?usp=drive_link",
+    details: {
+      businessContext: "RevoBank earns revenue from credit card transactions through a 1.5% merchant discount rate, while fraudulent transactions create direct financial losses. Understanding customer spending behavior and risk profiles is essential to increase card usage while maintaining profitability.",
+      objective: "Analyze credit card performance and segment customers to identify high-value users and guide targeted growth strategies.",
+      data: "Credit card transaction data and customer demographic information including income, credit score, and debt levels.",
+      approach: "Data was cleaned and aggregated at the user level, followed by K-means clustering using behavioral and financial features such as transaction amount, transaction count, recency, credit limit, and debt-to-income ratio.",
+      keyInsights: "Customer segmentation revealed three distinct groups: dormant users with no recent activity, active mainstream users generating stable transactions, and high-value power users responsible for a large share of transaction volume.",
+      businessRecommendations: "Prioritize high-value power users for premium rewards and credit limit expansion, scale engagement among active users, and selectively reactivate dormant users through targeted campaigns."
+    }
+  },
+  {
+    id: 4,
+    title: "Grocery Sales Performance Analysis",
+    summary: "Analyzing grocery sales transactions to identify top-performing product categories and understand key revenue drivers.",
+    image: "project4.jpg",
+    tags: ["SQL", "Google BigQuery", "Sales Analytics", "Retail Analytics"],
+    githubUrl: "",
+    deckUrl: "https://drive.google.com/file/d/1N4g2M0rDZfkGobS8uB5fN9T2DDL4-zZ7/view?usp=drive_link",
+    details: {
+      businessContext: "RevoGrocers is a grocery retail business operating across multiple locations and selling a wide range of products. The company collects detailed transactional sales data across products, categories, and customers, which can be analyzed to identify patterns in revenue generation and customer purchasing behavior.",
+      objective: "Analyze grocery sales transactions to identify top-performing product categories, understand key revenue drivers, and evaluate pricing and purchasing patterns.",
+      data: "Simulated grocery sales dataset containing transactional records, product information, and category data from January 2018 to May 2018.",
+      approach: "SQL queries were written in Google BigQuery to join relational tables (sales, products, and categories), calculate revenue after discounts, analyze category-level performance, and extract business insights from the data.",
+      keyInsights: "Revenue differences between product categories were driven more by customer spending levels than by the number of customers purchasing the products.",
+      businessRecommendations: "Strengthen high-performing categories such as Confections and Meat through cross-selling bundles, while reviewing pricing and product positioning for weaker categories like Grain to improve sales performance."
+    }
+  }
+];
+
+const technicalSkills = [
+  { name: "Python", desc: "Used for data cleaning, analysis, and statistical modeling.", icon: <BrainCircuit className="w-5 h-5 text-orange-700" /> },
+  { name: "SQL", desc: "Used for querying relational databases and extracting business data.", icon: <Database className="w-5 h-5 text-orange-700" /> },
+  { name: "Tableau", desc: "Used for building interactive dashboards and communicating insights visually.", icon: <BarChart className="w-5 h-5 text-orange-700" /> },
+  { name: "Power BI", desc: "Used for business intelligence reporting and connecting data across Microsoft ecosystems.", icon: <PieChart className="w-5 h-5 text-orange-700" /> },
+];
+
+const softSkills = [
+  { name: "Analytical Thinking", desc: "Breaking down complex problems into structured analysis.", icon: <Lightbulb className="w-5 h-5 text-stone-600" /> },
+  { name: "Business Communication", desc: "Translating analytical findings into clear, actionable insights.", icon: <MessageSquare className="w-5 h-5 text-stone-600" /> },
+  { name: "Data Storytelling", desc: "Presenting insights in a way that supports decision-making.", icon: <Presentation className="w-5 h-5 text-stone-600" /> },
+  { name: "Cross-functional Collaboration", desc: "Working effectively with diverse teams to achieve shared goals.", icon: <Users className="w-5 h-5 text-stone-600" /> },
+];
+
+// --- Components ---
+
+function ProjectModal({ project, onClose }: { project: typeof projects[0], onClose: () => void }) {
+  // Prevent scrolling on body when modal is open
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = 'unset'; };
+  }, []);
+
+  return (
+    <AnimatePresence>
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        onClick={onClose}
+        className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm overflow-y-auto"
+      >
+        <motion.div 
+          initial={{ y: 50, opacity: 0, scale: 0.95 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          exit={{ y: 20, opacity: 0, scale: 0.95 }}
+          transition={{ type: "spring", damping: 25, stiffness: 300 }}
+          onClick={(e) => e.stopPropagation()}
+          className="relative w-full max-w-3xl max-h-[90vh] overflow-y-auto bg-white rounded-2xl shadow-2xl"
+        >
+          <button 
+            onClick={onClose}
+            className="absolute top-4 right-4 p-2 bg-white/80 backdrop-blur-md rounded-full text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors z-10"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          
+          <div className="w-full aspect-video relative">
+            <img 
+              src={project.image} 
+              alt={project.title} 
+              className="w-full h-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-6 sm:p-8">
+              <h2 className="text-2xl sm:text-3xl font-bold text-white">{project.title}</h2>
+            </div>
+          </div>
+
+          <div className="p-6 sm:p-8 space-y-8">
+            <div className="space-y-6">
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map(tag => (
+                  <span key={tag} className="px-3 py-1 text-xs font-medium text-orange-800 bg-orange-50 border border-orange-100 rounded-full">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              {(project.githubUrl || project.deckUrl || project.tableauUrl) && (
+                <div className="flex flex-wrap gap-3">
+                  {project.githubUrl && (
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-stone-900 text-white text-sm font-medium rounded-lg hover:bg-stone-800 transition-colors">
+                      <Github className="w-4 h-4" />
+                      View Repository
+                    </a>
+                  )}
+                  {project.deckUrl && (
+                    <a href={project.deckUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-900 text-sm font-medium rounded-lg hover:bg-orange-200 transition-colors">
+                      <Presentation className="w-4 h-4" />
+                      View Deck
+                    </a>
+                  )}
+                  {project.tableauUrl && (
+                    <a href={project.tableauUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 border border-blue-200 text-sm font-medium rounded-lg hover:bg-blue-100 transition-colors">
+                      <BarChart className="w-4 h-4" />
+                      View Tableau
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div>
+                <h3 className="text-sm font-semibold text-stone-400 uppercase tracking-wider mb-2">Business Context</h3>
+                <p className="text-stone-700 leading-relaxed">{project.details.businessContext}</p>
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-stone-400 uppercase tracking-wider mb-2">Objective</h3>
+                <p className="text-stone-700 leading-relaxed">{project.details.objective}</p>
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold text-stone-400 uppercase tracking-wider mb-2">Data & Approach</h3>
+              <div className="bg-stone-50 rounded-xl p-5 space-y-4 border border-stone-100">
+                <div>
+                  <span className="font-medium text-stone-900 block mb-1">Data Sources:</span>
+                  <p className="text-stone-700 text-sm">{project.details.data}</p>
+                </div>
+                <div>
+                  <span className="font-medium text-stone-900 block mb-1">Methodology:</span>
+                  <p className="text-stone-700 text-sm">{project.details.approach}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2">
+              <div className="bg-orange-50/50 rounded-xl p-5 border border-orange-100">
+                <h3 className="text-sm font-semibold text-orange-800 uppercase tracking-wider mb-2 flex items-center gap-2">
+                  <Lightbulb className="w-4 h-4" /> Key Insights
+                </h3>
+                <p className="text-stone-800">{project.details.keyInsights}</p>
+              </div>
+              <div className="bg-stone-100/50 rounded-xl p-5 border border-stone-200">
+                <h3 className="text-sm font-semibold text-stone-800 uppercase tracking-wider mb-2 flex items-center gap-2">
+                  <BarChart className="w-4 h-4" /> Recommendations
+                </h3>
+                <p className="text-stone-800">{project.details.businessRecommendations}</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    </AnimatePresence>
+  );
+}
+
+function ScrollToTop() {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      if (window.pageYOffset > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+
+  return (
+    <AnimatePresence>
+      {isVisible && (
+        <motion.button
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.5 }}
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 z-40 p-3 bg-orange-700 text-white rounded-full shadow-lg hover:bg-orange-600 transition-colors"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </motion.button>
+      )}
+    </AnimatePresence>
+  );
+}
+
+export default function App() {
+  const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+
+  return (
+    <div className="min-h-screen bg-[#FDFBF7] font-sans text-stone-800 selection:bg-orange-100 selection:text-orange-900">
+      
+      {/* Navigation */}
+      <nav className="sticky top-0 z-40 bg-[#FDFBF7]/80 backdrop-blur-md border-b border-stone-200">
+        <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
+          <span className="font-serif font-bold text-xl tracking-tight text-stone-900">Pravadipta Riksadyani Pambudi</span>
+          <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-stone-600">
+            <a href="#about" className="hover:text-orange-700 transition-colors">About</a>
+            <a href="#skills" className="hover:text-orange-700 transition-colors">Skills</a>
+            <a href="#projects" className="hover:text-orange-700 transition-colors">Projects</a>
+            <a href="#contact" className="hover:text-orange-700 transition-colors">Contact</a>
+            <div className="w-px h-4 bg-stone-300"></div>
+            <a href="https://drive.google.com/file/d/18EsJadoAUDUIL8Fj8XaNI9uTdcT-7d8U/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-orange-700 hover:text-orange-800 transition-colors">
+              <FileText className="w-4 h-4" />
+              Resume
+            </a>
+          </div>
+        </div>
+      </nav>
+
+      <main className="max-w-5xl mx-auto px-6 py-12 sm:py-24 space-y-32">
+        
+        {/* Hero Section */}
+        <section className="pt-10 sm:pt-20">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="max-w-3xl"
+          >
+            <h1 className="text-4xl sm:text-5xl font-serif font-bold tracking-tight text-stone-900 mb-6">
+              Hi, I'm Pravadipta! <br/>
+              <span className="text-orange-700 font-serif italic">I'm a data analyst.</span>
+            </h1>
+            <p className="text-lg sm:text-xl text-stone-600 leading-relaxed mb-10 font-light">
+              I bridge the gap between data and decisions, turning complex analysis into something clear and actionable.
+            </p>
+            <div className="flex flex-wrap items-center gap-4">
+              <a href="#projects" className="px-6 py-3 bg-stone-800 text-white font-medium rounded-full hover:bg-stone-700 transition-colors shadow-sm">
+                View My Work
+              </a>
+              <a href="#contact" className="px-6 py-3 bg-white text-stone-700 font-medium rounded-full border border-stone-200 hover:border-stone-300 hover:bg-stone-50 transition-colors shadow-sm">
+                Get in Touch
+              </a>
+              <a href="https://drive.google.com/file/d/18EsJadoAUDUIL8Fj8XaNI9uTdcT-7d8U/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-3 text-stone-600 font-medium hover:text-orange-700 transition-colors">
+                <FileText className="w-4 h-4" />
+                View Resume
+              </a>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* About Me */}
+                <section id="about" className="scroll-mt-24">
+          <div className="mb-6">
+            <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest">About Me</h2>
+          </div>          
+          <div className="grid md:grid-cols-12 gap-12">
+            <div className="md:col-span-4">
+              <div className="group relative aspect-square rounded-2xl overflow-hidden bg-stone-200 mb-6 max-w-[240px] shadow-sm border border-stone-100">
+                <img 
+                  src="pfp1.jpg" 
+                  alt="Pravadipta" 
+                  className="w-full h-full object-cover sepia-[.3] group-hover:sepia-0 group-hover:scale-105 transition-all duration-500"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm text-stone-900 px-3 py-1.5 rounded-full text-sm font-medium shadow-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-1.5 pointer-events-none">
+                  <span>Hi there! :)</span>
+                </div>
+              </div>
+            </div>
+            <div className="md:col-span-8 space-y-12">
+              <p className="text-lg text-stone-700 leading-relaxed">
+                I'm a decision-focused data analyst with a background in Information Systems.
+                I work through problems end-to-end, from data preparation to visualization and recommendations, always with the goal of turning complexity into something clear and actionable.
+                Beyond the technical work, I care a lot about communicating ideas clearly and working well with the people around me.
+              </p>
+
+              <div className="grid sm:grid-cols-2 gap-10">
+                {/* Education */}
+                <div>
+                  <h3 className="text-lg font-serif font-semibold text-stone-900 mb-6 flex items-center gap-2">
+                    Education
+                  </h3>
+                  <div className="space-y-6">
+                    <div className="relative pl-4 border-l-2 border-stone-200">
+                      <div className="absolute w-2 h-2 bg-stone-300 rounded-full -left-[5px] top-2"></div>
+                      <h4 className="font-medium text-stone-900">Full-Stack Data Analytics</h4>
+                      <p className="text-stone-600 text-sm">RevoU &bull; Oct 2025 - Feb 2026</p>
+                    </div>
+                    <div className="relative pl-4 border-l-2 border-stone-200">
+                      <div className="absolute w-2 h-2 bg-stone-300 rounded-full -left-[5px] top-2"></div>
+                      <h4 className="font-medium text-stone-900">Bachelor of Computer Science</h4>
+                      <p className="text-stone-600 text-sm">Universitas Airlangga &bull; 2018 - 2025</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Experience */}
+                <div>
+                  <h3 className="text-lg font-serif font-semibold text-stone-900 mb-6 flex items-center gap-2">
+                    Experience
+                  </h3>
+                  <div className="space-y-6">
+                    <div className="relative pl-4 border-l-2 border-stone-200">
+                      <div className="absolute w-2 h-2 bg-stone-300 rounded-full -left-[5px] top-2"></div>
+                      <h4 className="font-medium text-stone-900">Android Developer Intern</h4>
+                      <p className="text-stone-600 text-sm">PT Alvonse Innovations &bull; Jan - Mar 2021</p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Skills */}
+        <section id="skills" className="scroll-mt-24">
+          <div className="space-y-16">
+            <div className="text-center sm:text-left">
+              <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest mb-4">Skills & Tools</h2>
+              <p className="text-xl text-stone-600 max-w-2xl">A summary of the technical tools and professional competencies I bring to every project.</p>
+            </div>
+            
+            <div className="grid md:grid-cols-2 gap-12">
+              <div>
+                <h3 className="text-xl font-serif font-semibold text-stone-900 mb-6">Technical Skills</h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {technicalSkills.map(skill => (
+                    <div key={skill.name} className="bg-white p-5 rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="p-2 bg-orange-50 rounded-lg">
+                          {skill.icon}
+                        </div>
+                        <h4 className="font-medium text-stone-900">{skill.name}</h4>
+                      </div>
+                      <p className="text-sm text-stone-600 leading-relaxed">{skill.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-serif font-semibold text-stone-900 mb-6">Soft Skills</h3>
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {softSkills.map(skill => (
+                    <div key={skill.name} className="bg-white p-5 rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="p-2 bg-stone-50 rounded-lg">
+                          {skill.icon}
+                        </div>
+                        <h4 className="font-medium text-stone-900">{skill.name}</h4>
+                      </div>
+                      <p className="text-sm text-stone-600 leading-relaxed">{skill.desc}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Projects */}
+        <section id="projects" className="scroll-mt-24">
+          <div className="mb-12">
+            <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest mb-4">Selected Work</h2>
+            <p className="text-xl text-stone-600 max-w-2xl">A collection of my recent data analysis projects, highlighting my approach to solving business problems.</p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project) => (
+              <motion.div 
+                key={project.id}
+                whileHover={{ y: -8 }}
+                onClick={() => setSelectedProject(project)}
+                className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
+              >
+                <div className="aspect-video overflow-hidden relative">
+                  <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+                  <img 
+                    src={project.image} 
+                    alt={project.title} 
+                    className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
+                    referrerPolicy="no-referrer"
+                  />
+                </div>
+                <div className="p-6 flex flex-col flex-grow">
+                  <h3 className="text-xl font-serif font-semibold text-stone-900 mb-3 group-hover:text-orange-700 transition-colors">
+                    {project.title}
+                  </h3>
+                  <p className="text-stone-600 text-sm mb-6 flex-grow">
+                    {project.summary}
+                  </p>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.tags.slice(0, 3).map(tag => (
+                      <span key={tag} className="px-2.5 py-1 text-[11px] font-medium text-stone-600 bg-stone-100 rounded-md">
+                        {tag}
+                      </span>
+                    ))}
+                    {project.tags.length > 3 && (
+                      <span className="px-2.5 py-1 text-[11px] font-medium text-stone-500 bg-stone-50 rounded-md border border-stone-100">
+                        +{project.tags.length - 3}
+                      </span>
+                    )}
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Contact */}
+        <section id="contact" className="scroll-mt-24 pb-24">
+          <div className="bg-stone-900 rounded-3xl p-8 sm:p-16 text-center">
+            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white mb-6">Let's work together.</h2>
+            <p className="text-stone-400 max-w-xl mx-auto mb-10 text-lg">
+              I'm currently open to new opportunities. Feel free to reach out whether it's about work, a question, or just to say hi!
+            </p>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a 
+                href="mailto:pravadipta@gmail.com" 
+                className="flex items-center gap-2 px-6 py-3 bg-orange-700 text-white font-medium rounded-full hover:bg-orange-600 transition-colors"
+              >
+                <Mail className="w-5 h-5" />
+                Email
+              </a>
+              <a 
+                href="https://linkedin.com/in/pravadipta" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 bg-stone-800 text-white font-medium rounded-full hover:bg-stone-700 transition-colors border border-stone-700"
+              >
+                <Linkedin className="w-5 h-5" />
+                LinkedIn
+              </a>
+              <a 
+                href="https://github.com/pravadipta" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-6 py-3 bg-stone-800 text-white font-medium rounded-full hover:bg-stone-700 transition-colors border border-stone-700"
+              >
+                <Github className="w-5 h-5" />
+                GitHub
+              </a>
+            </div>
+          </div>
+        </section>
+
+      </main>
+      
+      <ScrollToTop />
+      <footer className="border-t border-stone-200 bg-[#FDFBF7] py-8 text-center text-stone-500 text-sm">
+        <p>&copy; {new Date().getFullYear()} Pravadipta</p>
+      </footer>
+
+      {/* Project Modal */}
+      {selectedProject && (
+        <ProjectModal 
+          project={selectedProject} 
+          onClose={() => setSelectedProject(null)} 
+        />
+      )}
+    </div>
+  );
+}
