@@ -43,7 +43,7 @@ const projects = [
     id: 2,
     title: "Personal Expense Dashboard",
     summary: "Interactive dashboard analyzing personal spending patterns, budget utilization, and transaction behavior to support better financial decision-making.",
-    image: "project2.jpg",
+    image: "/project2.jpg",
     tags: ["Tableau", "Data Visualization", "Dashboard Design"],
     githubUrl: "https://github.com/pravadipta/personal-expense-dashboard",
     deckUrl: "https://drive.google.com/file/d/10vU7vlpPu4BpFoJT2GONuNoFShSPQ0Dn/view?usp=drive_link",
@@ -61,7 +61,7 @@ const projects = [
     id: 3,
     title: "Customer Segmentation Analysis",
     summary: "K-means clustering analysis on credit card customer data to identify high-value user segments and guide revenue growth strategies.",
-    image: "project3.jpg",
+    image: "/project3.jpg",
     tags: ["Python", "K-Means Clustering", "Customer Segmentation", "Financial Analysis"],
     githubUrl: "https://github.com/pravadipta/customer-segmentation-analysis",
     deckUrl: "https://drive.google.com/file/d/1Gnv0nDU-_aGQssHfCjVPv77IWCyrEF3W/view?usp=drive_link",
@@ -78,7 +78,7 @@ const projects = [
     id: 4,
     title: "Grocery Sales Performance Analysis",
     summary: "Analyzing grocery sales transactions to identify top-performing product categories and understand key revenue drivers.",
-    image: "project4.jpg",
+    image: "/project4.jpg",
     tags: ["SQL", "Google BigQuery", "Sales Analytics", "Retail Analytics"],
     githubUrl: "",
     deckUrl: "https://drive.google.com/file/d/1N4g2M0rDZfkGobS8uB5fN9T2DDL4-zZ7/view?usp=drive_link",
@@ -338,7 +338,7 @@ export default function App() {
             <div className="md:col-span-4">
               <div className="group relative aspect-square rounded-2xl overflow-hidden bg-stone-200 mb-6 max-w-[240px] shadow-sm border border-stone-100">
                 <img 
-                  src="pfp1.jpg" 
+                  src="/pfp1.jpg" 
                   alt="Pravadipta" 
                   className="w-full h-full object-cover sepia-[.3] group-hover:sepia-0 group-hover:scale-105 transition-all duration-500"
                   referrerPolicy="no-referrer"
