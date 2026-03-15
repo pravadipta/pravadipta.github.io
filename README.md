@@ -1,20 +1,54 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Pravadipta | Data Analyst
 
-# Run and deploy your AI Studio app
+Welcome to the source code for my personal portfolio website.\
+This site highlights my data analysis projects, technical skills, and experience translating data into clear, actionable insights.
 
-This contains everything you need to run your app locally.
+🌐 Live website:  
+https://pravadipta.github.io
 
-View your app in AI Studio: https://ai.studio/apps/0697289e-4068-4eee-bb1e-ac756eb70ace
+## Featured Projects
 
-## Run Locally
+The portfolio showcases several projects, including:
 
-**Prerequisites:**  Node.js
+- **Customer Segmentation Analysis**  
+  K-Means clustering on credit card transaction data to identify behavioral customer groups and support targeted revenue strategies.
 
+- **Market Basket Analysis**  
+  Association rule mining on retail transaction data to uncover cross-selling opportunities and improve basket size.
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+- **Personal Expense Dashboard**  
+  Interactive Tableau dashboard analyzing spending patterns, budget utilization, and transaction trends.
+
+- **Grocery Sales SQL Analysis**  
+  Relational SQL analysis of grocery sales data to explore product performance, sales trends, and operational insights.
+
+## Tech Stack
+
+- React
+- Vite
+- TypeScript
+- Tailwind CSS
+
+## Local Development
+
+To run the website locally:
+
+```
+npm install
+npm run dev
+```
+
+To build the production version:
+
+```
+npm run build
+```
+
+## Deployment
+
+The site is deployed using GitHub Pages with GitHub Actions CI/CD.\
+Any changes pushed to the `main` branch automatically trigger:
+
+1. Project build with Vite
+2. Static site generation
+3. Deployment to GitHub Pages
