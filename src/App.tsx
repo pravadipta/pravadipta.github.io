@@ -16,7 +16,10 @@ import {
   Presentation,
   Users,
   ArrowUp,
-  FileText
+  FileText,
+  Award,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 // --- Data ---
@@ -94,10 +97,10 @@ const projects = [
 ];
 
 const technicalSkills = [
-  { name: "Python", desc: "Used for data cleaning, analysis, and statistical modeling.", icon: <BrainCircuit className="w-5 h-5 text-orange-700" /> },
-  { name: "SQL", desc: "Used for querying relational databases and extracting business data.", icon: <Database className="w-5 h-5 text-orange-700" /> },
-  { name: "Tableau", desc: "Used for building interactive dashboards and communicating insights visually.", icon: <BarChart className="w-5 h-5 text-orange-700" /> },
-  { name: "Power BI", desc: "Used for business intelligence reporting and connecting data across Microsoft ecosystems.", icon: <PieChart className="w-5 h-5 text-orange-700" /> },
+  { name: "Python", desc: "Used for data cleaning, analysis, and statistical modeling.", icon: <BrainCircuit className="w-5 h-5 text-orange-700 dark:text-orange-500" /> },
+  { name: "SQL", desc: "Used for querying relational databases and extracting business data.", icon: <Database className="w-5 h-5 text-orange-700 dark:text-orange-500" /> },
+  { name: "Tableau", desc: "Used for building interactive dashboards and communicating insights visually.", icon: <BarChart className="w-5 h-5 text-orange-700 dark:text-orange-500" /> },
+  { name: "Power BI", desc: "Used for business intelligence reporting and connecting data across Microsoft ecosystems.", icon: <PieChart className="w-5 h-5 text-orange-700 dark:text-orange-500" /> },
 ];
 
 const softSkills = [
@@ -105,6 +108,23 @@ const softSkills = [
   { name: "Business Communication", desc: "Translating analytical findings into clear, actionable insights.", icon: <MessageSquare className="w-5 h-5 text-stone-600" /> },
   { name: "Data Storytelling", desc: "Presenting insights in a way that supports decision-making.", icon: <Presentation className="w-5 h-5 text-stone-600" /> },
   { name: "Cross-functional Collaboration", desc: "Working effectively with diverse teams to achieve shared goals.", icon: <Users className="w-5 h-5 text-stone-600" /> },
+];
+
+const testimonials = [
+  {
+    text: "...Pravadipta brings clarity, practicality, and thoughtful analysis to the table—and that combination is valuable in any data-driven organization.",
+    name: "Ahmad Hani Mustafa",
+    role: "Course Instructor, RevoU"
+  }
+];
+
+const certifications = [
+  {
+    name: "Full-Stack Data Analytics",
+    issuer: "RevoU",
+    date: "March 2026",
+    link: "https://certificates.revou.tech/?id=FSDA-2026-03-173646304974&name=Pravadipta%20Riksadyani%20Pambudi"
+  }
 ];
 
 // --- Components ---
@@ -156,7 +176,7 @@ function ProjectModal({ project, onClose }: { project: typeof projects[0], onClo
             <div className="space-y-6">
               <div className="flex flex-wrap gap-2">
                 {project.tags.map(tag => (
-                  <span key={tag} className="px-3 py-1 text-xs font-medium text-orange-800 bg-orange-50 border border-orange-100 rounded-full">
+                  <span key={tag} className="px-3 py-1 text-xs font-medium text-orange-800 dark:text-orange-400 bg-orange-50 dark:bg-orange-500/10 border border-orange-100 dark:border-orange-500/20 rounded-full">
                     {tag}
                   </span>
                 ))}
@@ -171,7 +191,7 @@ function ProjectModal({ project, onClose }: { project: typeof projects[0], onClo
                     </a>
                   )}
                   {project.deckUrl && (
-                    <a href={project.deckUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-900 text-sm font-medium rounded-lg hover:bg-orange-200 transition-colors">
+                    <a href={project.deckUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-orange-100 dark:bg-orange-500/20 text-orange-900 dark:text-orange-300 text-sm font-medium rounded-lg hover:bg-orange-200 dark:hover:bg-orange-500/30 transition-colors">
                       <Presentation className="w-4 h-4" />
                       View Deck
                     </a>
@@ -212,8 +232,8 @@ function ProjectModal({ project, onClose }: { project: typeof projects[0], onClo
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              <div className="bg-orange-50/50 rounded-xl p-5 border border-orange-100">
-                <h3 className="text-sm font-semibold text-orange-800 uppercase tracking-wider mb-2 flex items-center gap-2">
+              <div className="bg-orange-50/50 dark:bg-orange-500/5 rounded-xl p-5 border border-orange-100 dark:border-orange-500/20">
+                <h3 className="text-sm font-semibold text-orange-800 dark:text-orange-400 uppercase tracking-wider mb-2 flex items-center gap-2">
                   <Lightbulb className="w-4 h-4" /> Key Insights
                 </h3>
                 <p className="text-stone-800">{project.details.keyInsights}</p>
@@ -275,12 +295,21 @@ function ScrollToTop() {
 
 export default function App() {
   const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
   return (
-    <div className="min-h-screen bg-[#FDFBF7] font-sans text-stone-800 selection:bg-orange-100 selection:text-orange-900">
+    <div className="min-h-screen bg-stone-50 font-sans text-stone-800 selection:bg-orange-100 dark:selection:bg-orange-500/30 selection:text-orange-900 dark:selection:text-orange-200 transition-colors duration-300">
       
       {/* Navigation */}
-      <nav className="sticky top-0 z-40 bg-[#FDFBF7]/80 backdrop-blur-md border-b border-stone-200">
+      <nav className="sticky top-0 z-40 bg-stone-50/80 backdrop-blur-md border-b border-stone-200 transition-colors duration-300">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
           <span className="font-serif font-bold text-xl tracking-tight text-stone-900">Pravadipta Riksadyani Pambudi</span>
           <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-stone-600">
@@ -289,10 +318,17 @@ export default function App() {
             <a href="#projects" className="hover:text-orange-700 transition-colors">Projects</a>
             <a href="#contact" className="hover:text-orange-700 transition-colors">Contact</a>
             <div className="w-px h-4 bg-stone-300"></div>
-            <a href="https://drive.google.com/file/d/18EsJadoAUDUIL8Fj8XaNI9uTdcT-7d8U/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-orange-700 hover:text-orange-800 transition-colors">
+            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-orange-700 hover:text-orange-800 transition-colors">
               <FileText className="w-4 h-4" />
               Resume
             </a>
+            <button 
+              onClick={() => setIsDark(!isDark)} 
+              className="p-2 rounded-full hover:bg-stone-200 text-stone-600 transition-colors"
+              aria-label="Toggle Dark Mode"
+            >
+              {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
           </div>
         </div>
       </nav>
@@ -330,7 +366,7 @@ export default function App() {
         </section>
 
         {/* About Me */}
-                <section id="about" className="scroll-mt-24">
+        <section id="about" className="scroll-mt-24">
           <div className="mb-6">
             <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest">About Me</h2>
           </div>          
@@ -349,11 +385,19 @@ export default function App() {
               </div>
             </div>
             <div className="md:col-span-8 space-y-12">
-              <p className="text-lg text-stone-700 leading-relaxed">
-                I'm a decision-focused data analyst with a background in Information Systems.
-                I work through problems end-to-end, from data preparation to visualization and recommendations, always with the goal of turning complexity into something clear and actionable.
-                Beyond the technical work, I care a lot about communicating ideas clearly and working well with the people around me.
-              </p>
+              <div className="space-y-6">
+                <p className="text-xl font-serif text-stone-900 leading-snug">
+                  I'm a decision-focused data analyst with a background in Information Systems.
+                </p>
+                <div className="space-y-4">
+                  <p className="text-base text-stone-600 leading-relaxed">
+                    I work through problems end-to-end, from data preparation to visualization and recommendations, always with the goal of turning complexity into something clear and actionable.
+                  </p>
+                  <p className="text-base text-stone-600 leading-relaxed">
+                    Beyond the technical work, I care a lot about communicating ideas clearly and working well with the people around me.
+                  </p>
+                </div>
+              </div>
 
               <div className="grid sm:grid-cols-2 gap-10">
                 {/* Education */}
@@ -397,7 +441,7 @@ export default function App() {
         {/* Skills */}
         <section id="skills" className="scroll-mt-24">
           <div className="space-y-16">
-            <div className="text-center sm:text-left">
+            <div className="mb-12">
               <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest mb-4">Skills & Tools</h2>
               <p className="text-xl text-stone-600 max-w-2xl">A summary of the technical tools and professional competencies I bring to every project.</p>
             </div>
@@ -409,7 +453,7 @@ export default function App() {
                   {technicalSkills.map(skill => (
                     <div key={skill.name} className="bg-white p-5 rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 bg-orange-50 rounded-lg">
+                        <div className="p-2 bg-orange-50 dark:bg-orange-500/10 rounded-lg">
                           {skill.icon}
                         </div>
                         <h4 className="font-medium text-stone-900">{skill.name}</h4>
@@ -437,6 +481,41 @@ export default function App() {
                 </div>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Certifications */}
+        <section className="scroll-mt-24">
+          <div className="mb-12">
+            <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest mb-4">Certifications</h2>
+            <p className="text-xl text-stone-600 max-w-2xl">Certifications I've earned while continuing to grow and develop as a data analyst.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {certifications.map((cert, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col h-full hover:shadow-md transition-shadow">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="p-3 bg-orange-50 dark:bg-orange-500/10 text-orange-700 dark:text-orange-500 rounded-xl">
+                    <Award className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-serif font-semibold text-stone-900 leading-tight mb-1">{cert.name}</h3>
+                    <p className="text-stone-600">{cert.issuer}</p>
+                    <p className="text-sm text-stone-400 mt-1">Issued: {cert.date}</p>
+                  </div>
+                </div>
+                <div className="mt-auto pt-4 border-t border-stone-100">
+                  <a 
+                    href={cert.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-orange-700 hover:text-orange-800 transition-colors"
+                  >
+                    See credentials <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -489,6 +568,31 @@ export default function App() {
           </div>
         </section>
 
+        {/* Testimonials */}
+        <section className="scroll-mt-24">
+          <div className="mb-12">
+            <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest mb-4">What people say</h2>
+            <p className="text-xl text-stone-600 max-w-2xl">From people I've worked with and learned from along the way.</p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6">
+            {testimonials.map((testimonial, idx) => (
+              <div key={idx} className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col h-full">
+                <div className="text-orange-700 mb-4">
+                  <svg className="w-6 h-6 opacity-50" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
+                    <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
+                  </svg>
+                </div>
+                <p className="text-lg text-stone-700 leading-relaxed flex-grow mb-5 italic">"{testimonial.text}"</p>
+                <div>
+                  <p className="text-lg font-serif font-semibold text-stone-900">{testimonial.name}</p>
+                  <p className="text-base text-stone-500">{testimonial.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         {/* Contact */}
         <section id="contact" className="scroll-mt-24 pb-24">
           <div className="bg-stone-900 rounded-3xl p-8 sm:p-16 text-center">
@@ -529,7 +633,7 @@ export default function App() {
       </main>
       
       <ScrollToTop />
-      <footer className="border-t border-stone-200 bg-[#FDFBF7] py-8 text-center text-stone-500 text-sm">
+      <footer className="border-t border-stone-200 bg-stone-100 dark:bg-stone-100 py-8 text-center text-stone-500 text-sm">
         <p>&copy; {new Date().getFullYear()} Pravadipta</p>
       </footer>
 

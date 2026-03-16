@@ -1,7 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 @import "tailwindcss";
 
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Lora", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+@import "tailwindcss";
+
+@layer base {
+  .dark {
+    --color-stone-50: #1c1917;
+    --color-stone-100: #292524;
+    --color-stone-200: #44403c;
+    --color-stone-300: #57534e;
+    --color-stone-400: #78716c;
+    --color-stone-500: #a8a29e;
+    --color-stone-600: #d6d3d1;
+    --color-stone-700: #d6d3d1;
+    --color-stone-800: #e7e5e4;
+    --color-stone-900: #e7e5e4;
+    --color-stone-950: #f5f5f4;
+    
+    --color-white: #1c1917;
+    --color-black: #e7e5e4;
+
+    --color-blue-50: #172554;
+    --color-blue-100: #1e3a8a;
+    --color-blue-200: #1e40af;
+    --color-blue-600: #60a5fa;
+    --color-blue-700: #93c5fd;
+  }
 }
