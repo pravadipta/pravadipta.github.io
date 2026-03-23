@@ -10,7 +10,7 @@ import {
   Database,
   BarChart,
   BrainCircuit,
-  PieChart,
+  Table,
   MessageSquare,
   Lightbulb,
   Presentation,
@@ -97,17 +97,17 @@ const projects = [
 ];
 
 const technicalSkills = [
-  { name: "Python", desc: "Used for data cleaning, analysis, and statistical modeling.", icon: <BrainCircuit className="w-5 h-5 text-orange-700 dark:text-orange-500" /> },
-  { name: "SQL", desc: "Used for querying relational databases and extracting business data.", icon: <Database className="w-5 h-5 text-orange-700 dark:text-orange-500" /> },
-  { name: "Tableau", desc: "Used for building interactive dashboards and communicating insights visually.", icon: <BarChart className="w-5 h-5 text-orange-700 dark:text-orange-500" /> },
-  { name: "Power BI", desc: "Used for business intelligence reporting and connecting data across Microsoft ecosystems.", icon: <PieChart className="w-5 h-5 text-orange-700 dark:text-orange-500" /> },
+  { name: "Python", desc: "Data cleaning, analysis, and statistical modeling using libraries such as Pandas and Scikit-learn.", icon: <BrainCircuit className="w-5 h-5 text-accent-700 dark:text-accent-500" /> },
+  { name: "SQL", desc: "Querying relational databases and extracting business insights, with experience in Google BigQuery.", icon: <Database className="w-5 h-5 text-accent-700 dark:text-accent-500" /> },
+  { name: "Spreadsheets", desc: "Data manipulation, pivot tables, and reporting in Microsoft Excel and Google Sheets.", icon: <Table className="w-5 h-5 text-accent-700 dark:text-accent-500" /> },
+  { name: "Tableau", desc: "Building interactive dashboards and communicating insights visually.", icon: <BarChart className="w-5 h-5 text-accent-700 dark:text-accent-500" /> },
 ];
 
 const softSkills = [
-  { name: "Analytical Thinking", desc: "Breaking down complex problems into structured analysis.", icon: <Lightbulb className="w-5 h-5 text-stone-600" /> },
-  { name: "Business Communication", desc: "Translating analytical findings into clear, actionable insights.", icon: <MessageSquare className="w-5 h-5 text-stone-600" /> },
-  { name: "Data Storytelling", desc: "Presenting insights in a way that supports decision-making.", icon: <Presentation className="w-5 h-5 text-stone-600" /> },
-  { name: "Cross-functional Collaboration", desc: "Working effectively with diverse teams to achieve shared goals.", icon: <Users className="w-5 h-5 text-stone-600" /> },
+  { name: "Analytical Thinking", desc: "Breaking down complex problems into structured analysis.", icon: <Lightbulb className="w-5 h-5 text-base-600" /> },
+  { name: "Insight Communication", desc: "Translating analytical findings into clear, actionable insights for business decisions.", icon: <MessageSquare className="w-5 h-5 text-base-600" /> },
+  { name: "Data Storytelling", desc: "Presenting findings in a clear, accessible way for technical and non-technical audiences.", icon: <Presentation className="w-5 h-5 text-base-600" /> },
+  { name: "Collaborative Communication", desc: "Communicating effectively across diverse cultural and professional environments.", icon: <Users className="w-5 h-5 text-base-600" /> },
 ];
 
 const testimonials = [
@@ -176,7 +176,7 @@ function ProjectModal({ project, onClose }: { project: typeof projects[0], onClo
             <div className="space-y-6">
               <div className="flex flex-wrap gap-2">
                 {project.tags.map(tag => (
-                  <span key={tag} className="px-3 py-1 text-xs font-medium text-orange-800 dark:text-orange-400 bg-orange-50 dark:bg-orange-500/10 border border-orange-100 dark:border-orange-500/20 rounded-full">
+                  <span key={tag} className="px-3 py-1 text-xs font-medium text-accent-800 dark:text-accent-400 bg-accent-50 dark:bg-accent-500/10 border border-accent-100 dark:border-accent-500/20 rounded-full">
                     {tag}
                   </span>
                 ))}
@@ -185,19 +185,19 @@ function ProjectModal({ project, onClose }: { project: typeof projects[0], onClo
               {(project.githubUrl || project.deckUrl || project.tableauUrl) && (
                 <div className="flex flex-wrap gap-3">
                   {project.githubUrl && (
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-stone-900 text-white text-sm font-medium rounded-lg hover:bg-stone-800 transition-colors">
+                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-base-800 text-white text-sm font-medium rounded-lg hover:bg-base-700 transition-colors">
                       <Github className="w-4 h-4" />
                       View Repository
                     </a>
                   )}
                   {project.deckUrl && (
-                    <a href={project.deckUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-orange-100 dark:bg-orange-500/20 text-orange-900 dark:text-orange-300 text-sm font-medium rounded-lg hover:bg-orange-200 dark:hover:bg-orange-500/30 transition-colors">
+                    <a href={project.deckUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-500/30 text-slate-700 dark:text-slate-300 text-sm font-medium rounded-lg hover:bg-slate-300 dark:hover:bg-slate-500/40 transition-colors">
                       <Presentation className="w-4 h-4" />
                       View Deck
                     </a>
                   )}
                   {project.tableauUrl && (
-                    <a href={project.tableauUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-blue-50 text-blue-700 border border-blue-200 text-sm font-medium rounded-lg hover:bg-blue-100 transition-colors">
+                    <a href={project.tableauUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-blue-200 dark:bg-blue-500/20 text-blue-900 dark:text-blue-300 text-sm font-medium rounded-lg hover:bg-blue-100 transition-colors">
                       <BarChart className="w-4 h-4" />
                       View Tableau
                     </a>
@@ -208,41 +208,41 @@ function ProjectModal({ project, onClose }: { project: typeof projects[0], onClo
 
             <div className="grid gap-6 sm:grid-cols-2">
               <div>
-                <h3 className="text-sm font-semibold text-stone-400 uppercase tracking-wider mb-2">Business Context</h3>
-                <p className="text-stone-700 leading-relaxed">{project.details.businessContext}</p>
+                <h3 className="text-sm font-semibold text-base-400 uppercase tracking-wider mb-2">Business Context</h3>
+                <p className="text-base-700 leading-relaxed">{project.details.businessContext}</p>
               </div>
               <div>
-                <h3 className="text-sm font-semibold text-stone-400 uppercase tracking-wider mb-2">Objective</h3>
-                <p className="text-stone-700 leading-relaxed">{project.details.objective}</p>
+                <h3 className="text-sm font-semibold text-base-400 uppercase tracking-wider mb-2">Objective</h3>
+                <p className="text-base-700 leading-relaxed">{project.details.objective}</p>
               </div>
             </div>
 
             <div>
-              <h3 className="text-sm font-semibold text-stone-400 uppercase tracking-wider mb-2">Data & Approach</h3>
-              <div className="bg-stone-50 rounded-xl p-5 space-y-4 border border-stone-100">
+              <h3 className="text-sm font-semibold text-base-400 uppercase tracking-wider mb-2">Data & Approach</h3>
+              <div className="bg-base-50 rounded-xl p-5 space-y-4 border border-base-200">
                 <div>
-                  <span className="font-medium text-stone-900 block mb-1">Data Sources:</span>
-                  <p className="text-stone-700 text-sm">{project.details.data}</p>
+                  <span className="font-medium text-base-900 block mb-1">Data Sources:</span>
+                  <p className="text-base-700 text-sm">{project.details.data}</p>
                 </div>
                 <div>
-                  <span className="font-medium text-stone-900 block mb-1">Methodology:</span>
-                  <p className="text-stone-700 text-sm">{project.details.approach}</p>
+                  <span className="font-medium text-base-900 block mb-1">Methodology:</span>
+                  <p className="text-base-700 text-sm">{project.details.approach}</p>
                 </div>
               </div>
             </div>
 
             <div className="grid gap-6 sm:grid-cols-2">
-              <div className="bg-orange-50/50 dark:bg-orange-500/5 rounded-xl p-5 border border-orange-100 dark:border-orange-500/20">
-                <h3 className="text-sm font-semibold text-orange-800 dark:text-orange-400 uppercase tracking-wider mb-2 flex items-center gap-2">
+              <div className="bg-accent-50/50 dark:bg-accent-500/5 rounded-xl p-5 border border-accent-100 dark:border-accent-500/20">
+                <h3 className="text-sm font-semibold text-accent-800 dark:text-accent-400 uppercase tracking-wider mb-2 flex items-center gap-2">
                   <Lightbulb className="w-4 h-4" /> Key Insights
                 </h3>
-                <p className="text-stone-800">{project.details.keyInsights}</p>
+                <p className="text-base-800">{project.details.keyInsights}</p>
               </div>
-              <div className="bg-stone-100/50 rounded-xl p-5 border border-stone-200">
-                <h3 className="text-sm font-semibold text-stone-800 uppercase tracking-wider mb-2 flex items-center gap-2">
+              <div className="bg-accent-50/50 dark:bg-accent-500/5 rounded-xl p-5 border border-accent-100 dark:border-accent-500/20">
+                <h3 className="text-sm font-semibold text-accent-800 dark:text-accent-400 uppercase tracking-wider mb-2 flex items-center gap-2">
                   <BarChart className="w-4 h-4" /> Recommendations
                 </h3>
-                <p className="text-stone-800">{project.details.businessRecommendations}</p>
+                <p className="text-base-800">{project.details.businessRecommendations}</p>
               </div>
             </div>
           </div>
@@ -283,7 +283,7 @@ function ScrollToTop() {
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.5 }}
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 z-40 p-3 bg-orange-700 text-white rounded-full shadow-lg hover:bg-orange-600 transition-colors"
+          className="fixed bottom-8 right-8 z-40 p-3 bg-accent-700 dark:bg-accent-500 text-white rounded-full shadow-lg hover:bg-accent-800 dark:hover:bg-accent-400 transition-colors"
           aria-label="Scroll to top"
         >
           <ArrowUp className="w-6 h-6" />
@@ -306,25 +306,25 @@ export default function App() {
   }, [isDark]);
 
   return (
-    <div className="min-h-screen bg-stone-50 font-sans text-stone-800 selection:bg-orange-100 dark:selection:bg-orange-500/30 selection:text-orange-900 dark:selection:text-orange-200 transition-colors duration-300">
+    <div className="min-h-screen bg-base-50 font-sans text-base-800 selection:bg-accent-100 dark:selection:bg-accent-500/30 selection:text-accent-900 dark:selection:text-accent-200 transition-colors duration-300">
       
       {/* Navigation */}
-      <nav className="sticky top-0 z-40 bg-stone-50/80 backdrop-blur-md border-b border-stone-200 transition-colors duration-300">
+      <nav className="sticky top-0 z-40 bg-base-50/80 backdrop-blur-md border-b border-base-200 transition-colors duration-300">
         <div className="max-w-5xl mx-auto px-6 h-16 flex items-center justify-between">
-          <span className="font-serif font-bold text-xl tracking-tight text-stone-900">Pravadipta Riksadyani Pambudi</span>
-          <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-stone-600">
-            <a href="#about" className="hover:text-orange-700 transition-colors">About</a>
-            <a href="#skills" className="hover:text-orange-700 transition-colors">Skills</a>
-            <a href="#projects" className="hover:text-orange-700 transition-colors">Projects</a>
-            <a href="#contact" className="hover:text-orange-700 transition-colors">Contact</a>
-            <div className="w-px h-4 bg-stone-300"></div>
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-orange-700 hover:text-orange-800 transition-colors">
+          <span className="font-serif font-bold text-xl tracking-tight text-base-900">Pravadipta Riksadyani Pambudi</span>
+          <div className="hidden sm:flex items-center gap-6 text-sm font-medium text-base-600">
+            <a href="#about" className="hover:text-accent-700 dark:hover:text-accent-500">About</a>
+            <a href="#skills" className="hover:text-accent-700 dark:hover:text-accent-500">Skills</a>
+            <a href="#projects" className="hover:text-accent-700 dark:hover:text-accent-500">Projects</a>
+            <a href="#contact" className="hover:text-accent-700 dark:hover:text-accent-500">Contact</a>
+            <div className="w-px h-4 bg-base-300"></div>
+            <a href="https://drive.google.com/file/d/18EsJadoAUDUIL8Fj8XaNI9uTdcT-7d8U/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 text-accent-700 dark:text-accent-500 hover:text-accent-800 dark:hover:text-accent-400 transition-colors">
               <FileText className="w-4 h-4" />
               Resume
             </a>
             <button 
               onClick={() => setIsDark(!isDark)} 
-              className="p-2 rounded-full hover:bg-stone-200 text-stone-600 transition-colors"
+              className="p-2 rounded-full hover:bg-base-200 text-base-600 transition-colors"
               aria-label="Toggle Dark Mode"
             >
               {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
@@ -343,21 +343,21 @@ export default function App() {
             transition={{ duration: 0.5 }}
             className="max-w-3xl"
           >
-            <h1 className="text-4xl sm:text-5xl font-serif font-bold tracking-tight text-stone-900 mb-6">
+            <h1 className="text-4xl sm:text-5xl font-serif font-bold tracking-tight text-base-900 mb-6">
               Hi, I'm Pravadipta! <br/>
-              <span className="text-orange-700 font-serif italic">I'm a data analyst.</span>
+              <span className="text-accent-700 dark:text-accent-500 font-serif italic">I'm a data analyst.</span>
             </h1>
-            <p className="text-lg sm:text-xl text-stone-600 leading-relaxed mb-10 font-light">
+            <p className="text-lg sm:text-xl text-base-600 leading-relaxed mb-10 font-light max-w-2xl">
               I bridge the gap between data and decisions, turning complex analysis into something clear and actionable.
             </p>
             <div className="flex flex-wrap items-center gap-4">
-              <a href="#projects" className="px-6 py-3 bg-stone-800 text-white font-medium rounded-full hover:bg-stone-700 transition-colors shadow-sm">
+              <a href="#projects" className="px-6 py-3 bg-base-800 text-white font-medium rounded-full border border-base-200 hover:bg-base-700 transition-colors shadow-sm">
                 View My Work
               </a>
-              <a href="#contact" className="px-6 py-3 bg-white text-stone-700 font-medium rounded-full border border-stone-200 hover:border-stone-300 hover:bg-stone-50 transition-colors shadow-sm">
+              <a href="#contact" className="px-6 py-3 bg-white text-base-700 font-medium rounded-full border border-base-200 hover:bg-base-100 transition-colors shadow-sm">
                 Get in Touch
               </a>
-              <a href="https://drive.google.com/file/d/18EsJadoAUDUIL8Fj8XaNI9uTdcT-7d8U/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-3 text-stone-600 font-medium hover:text-orange-700 transition-colors">
+              <a href="https://drive.google.com/file/d/18EsJadoAUDUIL8Fj8XaNI9uTdcT-7d8U/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-3 text-base-600 font-medium hover:text-accent-700 dark:hover:text-accent-500 transition-colors">
                 <FileText className="w-4 h-4" />
                 View Resume
               </a>
@@ -368,32 +368,32 @@ export default function App() {
         {/* About Me */}
         <section id="about" className="scroll-mt-24">
           <div className="mb-6">
-            <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest">About Me</h2>
+            <h2 className="text-sm font-bold text-base-400 uppercase tracking-widest">About Me</h2>
           </div>          
           <div className="grid md:grid-cols-12 gap-12">
             <div className="md:col-span-4">
-              <div className="group relative aspect-square rounded-2xl overflow-hidden bg-stone-200 mb-6 max-w-[240px] shadow-sm border border-stone-100">
+              <div className="group relative aspect-square rounded-2xl overflow-hidden bg-base-200 mb-6 max-w-[240px] shadow-sm border border-base-200">
                 <img 
                   src="/pfp1.jpg" 
                   alt="Pravadipta" 
                   className="w-full h-full object-cover sepia-[.3] group-hover:sepia-0 group-hover:scale-105 transition-all duration-500"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm text-stone-900 px-3 py-1.5 rounded-full text-sm font-medium shadow-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-1.5 pointer-events-none">
+                <div className="absolute bottom-4 right-4 bg-white/90 backdrop-blur-sm text-base-900 px-3 py-1.5 rounded-full text-sm font-medium shadow-lg opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 flex items-center gap-1.5 pointer-events-none">
                   <span>Hi there! :)</span>
                 </div>
               </div>
             </div>
             <div className="md:col-span-8 space-y-12">
               <div className="space-y-6">
-                <p className="text-xl font-serif text-stone-900 leading-snug">
+                <p className="text-xl font-serif text-base-900 leading-snug">
                   I'm a decision-focused data analyst with a background in Information Systems.
                 </p>
                 <div className="space-y-4">
-                  <p className="text-base text-stone-600 leading-relaxed">
+                  <p className="text-base text-base-600 leading-relaxed">
                     I work through problems end-to-end, from data preparation to visualization and recommendations, always with the goal of turning complexity into something clear and actionable.
                   </p>
-                  <p className="text-base text-stone-600 leading-relaxed">
+                  <p className="text-base text-base-600 leading-relaxed">
                     Beyond the technical work, I care a lot about communicating ideas clearly and working well with the people around me.
                   </p>
                 </div>
@@ -402,33 +402,33 @@ export default function App() {
               <div className="grid sm:grid-cols-2 gap-10">
                 {/* Education */}
                 <div>
-                  <h3 className="text-lg font-serif font-semibold text-stone-900 mb-6 flex items-center gap-2">
+                  <h3 className="text-lg font-serif font-semibold text-base-900 mb-6 flex items-center gap-2">
                     Education
                   </h3>
                   <div className="space-y-6">
-                    <div className="relative pl-4 border-l-2 border-stone-200">
-                      <div className="absolute w-2 h-2 bg-stone-300 rounded-full -left-[5px] top-2"></div>
-                      <h4 className="font-medium text-stone-900">Full-Stack Data Analytics</h4>
-                      <p className="text-stone-600 text-sm">RevoU &bull; Oct 2025 - Feb 2026</p>
+                    <div className="relative pl-4 border-l-2 border-base-200">
+                      <div className="absolute w-2 h-2 bg-base-300 rounded-full -left-[5px] top-2"></div>
+                      <h4 className="font-medium text-base-900">Full-Stack Data Analytics</h4>
+                      <p className="text-base-600 text-sm">RevoU &bull; Oct 2025 - Feb 2026</p>
                     </div>
-                    <div className="relative pl-4 border-l-2 border-stone-200">
-                      <div className="absolute w-2 h-2 bg-stone-300 rounded-full -left-[5px] top-2"></div>
-                      <h4 className="font-medium text-stone-900">Bachelor of Computer Science</h4>
-                      <p className="text-stone-600 text-sm">Universitas Airlangga &bull; 2018 - 2025</p>
+                    <div className="relative pl-4 border-l-2 border-base-200">
+                      <div className="absolute w-2 h-2 bg-base-300 rounded-full -left-[5px] top-2"></div>
+                      <h4 className="font-medium text-base-900">Bachelor of Computer Science</h4>
+                      <p className="text-base-600 text-sm">Universitas Airlangga &bull; 2018 - 2025</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Experience */}
                 <div>
-                  <h3 className="text-lg font-serif font-semibold text-stone-900 mb-6 flex items-center gap-2">
+                  <h3 className="text-lg font-serif font-semibold text-base-900 mb-6 flex items-center gap-2">
                     Experience
                   </h3>
                   <div className="space-y-6">
-                    <div className="relative pl-4 border-l-2 border-stone-200">
-                      <div className="absolute w-2 h-2 bg-stone-300 rounded-full -left-[5px] top-2"></div>
-                      <h4 className="font-medium text-stone-900">Android Developer Intern</h4>
-                      <p className="text-stone-600 text-sm">PT Alvonse Innovations &bull; Jan - Mar 2021</p>
+                    <div className="relative pl-4 border-l-2 border-base-200">
+                      <div className="absolute w-2 h-2 bg-base-300 rounded-full -left-[5px] top-2"></div>
+                      <h4 className="font-medium text-base-900">Android Developer Intern</h4>
+                      <p className="text-base-600 text-sm">PT Alvonse Innovations &bull; Jan - Mar 2021</p>
                     </div>
                   </div>
                 </div>
@@ -442,40 +442,40 @@ export default function App() {
         <section id="skills" className="scroll-mt-24">
           <div className="space-y-16">
             <div className="mb-12">
-              <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest mb-4">Skills & Tools</h2>
-              <p className="text-xl text-stone-600 max-w-2xl">A summary of the technical tools and professional competencies I bring to every project.</p>
+              <h2 className="text-sm font-bold text-base-400 uppercase tracking-widest mb-4">Skills & Tools</h2>
+              <p className="text-xl text-base-600 max-w-2xl">A summary of the technical tools and professional competencies I bring to every project.</p>
             </div>
             
             <div className="grid md:grid-cols-2 gap-12">
               <div>
-                <h3 className="text-xl font-serif font-semibold text-stone-900 mb-6">Technical Skills</h3>
+                <h3 className="text-xl font-serif font-semibold text-base-900 mb-6">Technical Skills</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {technicalSkills.map(skill => (
-                    <div key={skill.name} className="bg-white p-5 rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div key={skill.name} className="bg-white p-5 rounded-2xl border border-base-200 shadow-sm hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 bg-orange-50 dark:bg-orange-500/10 rounded-lg">
+                        <div className="p-2 bg-accent-50 dark:bg-accent-500/10 rounded-lg">
                           {skill.icon}
                         </div>
-                        <h4 className="font-medium text-stone-900">{skill.name}</h4>
+                        <h4 className="font-medium text-base-900">{skill.name}</h4>
                       </div>
-                      <p className="text-sm text-stone-600 leading-relaxed">{skill.desc}</p>
+                      <p className="text-[13px] text-base-600 leading-relaxed">{skill.desc}</p>
                     </div>
                   ))}
                 </div>
               </div>
 
               <div>
-                <h3 className="text-xl font-serif font-semibold text-stone-900 mb-6">Soft Skills</h3>
+                <h3 className="text-xl font-serif font-semibold text-base-900 mb-6">Soft Skills</h3>
                 <div className="grid sm:grid-cols-2 gap-4">
                   {softSkills.map(skill => (
-                    <div key={skill.name} className="bg-white p-5 rounded-2xl border border-stone-100 shadow-sm hover:shadow-md transition-shadow">
+                    <div key={skill.name} className="bg-white p-5 rounded-2xl border border-base-200 shadow-sm hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 bg-stone-50 rounded-lg">
+                        <div className="p-2 bg-base-50 rounded-lg">
                           {skill.icon}
                         </div>
-                        <h4 className="font-medium text-stone-900">{skill.name}</h4>
+                        <h4 className="font-medium text-base-900">{skill.name}</h4>
                       </div>
-                      <p className="text-sm text-stone-600 leading-relaxed">{skill.desc}</p>
+                      <p className="text-[13px] text-base-600 leading-relaxed">{skill.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -487,29 +487,29 @@ export default function App() {
         {/* Certifications */}
         <section className="scroll-mt-24">
           <div className="mb-12">
-            <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest mb-4">Certifications</h2>
-            <p className="text-xl text-stone-600 max-w-2xl">Certifications I've earned while continuing to grow and develop as a data analyst.</p>
+            <h2 className="text-sm font-bold text-base-400 uppercase tracking-widest mb-4">Certifications</h2>
+            <p className="text-xl text-base-600 max-w-2xl">Certifications I've earned while continuing to grow and develop as a data analyst.</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
             {certifications.map((cert, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col h-full hover:shadow-md transition-shadow">
+              <div key={idx} className="bg-white p-6 rounded-2xl border border-base-200 shadow-sm flex flex-col h-full hover:shadow-md transition-shadow">
                 <div className="flex items-start gap-4 mb-4">
-                  <div className="p-3 bg-orange-50 dark:bg-orange-500/10 text-orange-700 dark:text-orange-500 rounded-xl">
+                  <div className="p-3 bg-accent-50 dark:bg-accent-500/10 text-accent-700 dark:text-accent-500 rounded-xl">
                     <Award className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-serif font-semibold text-stone-900 leading-tight mb-1">{cert.name}</h3>
-                    <p className="text-stone-600">{cert.issuer}</p>
-                    <p className="text-sm text-stone-400 mt-1">Issued: {cert.date}</p>
+                    <h3 className="text-lg font-serif font-semibold text-base-900 leading-tight mb-1">{cert.name}</h3>
+                    <p className="text-base-600">{cert.issuer}</p>
+                    <p className="text-sm text-base-400 mt-1">Issued: {cert.date}</p>
                   </div>
                 </div>
-                <div className="mt-auto pt-4 border-t border-stone-100">
+                <div className="mt-auto pt-4 border-t border-base-200">
                   <a 
                     href={cert.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-medium text-orange-700 hover:text-orange-800 transition-colors"
+                    className="inline-flex items-center gap-1 text-sm font-medium text-accent-700 dark:text-accent-500 hover:text-accent-800 dark:hover:text-accent-400 transition-colors"
                   >
                     See credentials <ExternalLink className="w-3 h-3" />
                   </a>
@@ -522,8 +522,8 @@ export default function App() {
         {/* Projects */}
         <section id="projects" className="scroll-mt-24">
           <div className="mb-12">
-            <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest mb-4">Selected Work</h2>
-            <p className="text-xl text-stone-600 max-w-2xl">A collection of my recent data analysis projects, highlighting my approach to solving business problems.</p>
+            <h2 className="text-sm font-bold text-base-400 uppercase tracking-widest mb-4">Selected Work</h2>
+            <p className="text-xl text-base-600 max-w-2xl">A collection of my recent data analysis projects, highlighting my approach to solving business problems.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -532,10 +532,10 @@ export default function App() {
                 key={project.id}
                 whileHover={{ y: -8 }}
                 onClick={() => setSelectedProject(project)}
-                className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-stone-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
+                className="group cursor-pointer bg-white rounded-2xl overflow-hidden border border-base-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full"
               >
                 <div className="aspect-video overflow-hidden relative">
-                  <div className="absolute inset-0 bg-stone-900/10 group-hover:bg-transparent transition-colors z-10"></div>
+                  <div className="absolute inset-0 bg-[#000]/10 group-hover:bg-transparent transition-colors z-10"></div>
                   <img 
                     src={project.image} 
                     alt={project.title} 
@@ -544,20 +544,20 @@ export default function App() {
                   />
                 </div>
                 <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="text-xl font-serif font-semibold text-stone-900 mb-3 group-hover:text-orange-700 transition-colors">
+                  <h3 className="text-xl font-serif font-semibold text-base-900 mb-3 group-hover:text-accent-700 dark:group-hover:text-accent-500 transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-stone-600 text-sm mb-6 flex-grow">
+                  <p className="text-base-600 text-sm mb-6 flex-grow">
                     {project.summary}
                   </p>
                   <div className="flex flex-wrap gap-2 mt-auto">
                     {project.tags.slice(0, 3).map(tag => (
-                      <span key={tag} className="px-2.5 py-1 text-[11px] font-medium text-stone-600 bg-stone-100 rounded-md">
+                      <span key={tag} className="px-2.5 py-1 text-[11px] font-medium text-base-600 bg-base-100 rounded-md">
                         {tag}
                       </span>
                     ))}
                     {project.tags.length > 3 && (
-                      <span className="px-2.5 py-1 text-[11px] font-medium text-stone-500 bg-stone-50 rounded-md border border-stone-100">
+                      <span className="px-2.5 py-1 text-[11px] font-medium text-base-500 bg-base-50 rounded-md border border-base-100">
                         +{project.tags.length - 3}
                       </span>
                     )}
@@ -571,22 +571,22 @@ export default function App() {
         {/* Testimonials */}
         <section className="scroll-mt-24">
           <div className="mb-12">
-            <h2 className="text-sm font-bold text-stone-400 uppercase tracking-widest mb-4">What people say</h2>
-            <p className="text-xl text-stone-600 max-w-2xl">From people I've worked with and learned from along the way.</p>
+            <h2 className="text-sm font-bold text-base-400 uppercase tracking-widest mb-4">What people say</h2>
+            <p className="text-xl text-base-600 max-w-2xl">From people I've worked with and learned from along the way.</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
             {testimonials.map((testimonial, idx) => (
-              <div key={idx} className="bg-white p-6 rounded-2xl border border-stone-200 shadow-sm flex flex-col h-full">
-                <div className="text-orange-700 mb-4">
+              <div key={idx} className="bg-white p-6 rounded-2xl border border-base-200 shadow-sm flex flex-col h-full">
+                <div className="text-accent-700 dark:text-accent-500 mb-4">
                   <svg className="w-6 h-6 opacity-50" fill="currentColor" viewBox="0 0 32 32" aria-hidden="true">
                     <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                   </svg>
                 </div>
-                <p className="text-lg text-stone-700 leading-relaxed flex-grow mb-5 italic">"{testimonial.text}"</p>
+                <p className="text-lg text-base-700 leading-relaxed flex-grow mb-5 italic">"{testimonial.text}"</p>
                 <div>
-                  <p className="text-lg font-serif font-semibold text-stone-900">{testimonial.name}</p>
-                  <p className="text-base text-stone-500">{testimonial.role}</p>
+                  <p className="text-lg font-serif font-semibold text-base-900">{testimonial.name}</p>
+                  <p className="text-base text-base-500">{testimonial.role}</p>
                 </div>
               </div>
             ))}
@@ -595,15 +595,15 @@ export default function App() {
 
         {/* Contact */}
         <section id="contact" className="scroll-mt-24 pb-24">
-          <div className="bg-stone-900 rounded-3xl p-8 sm:p-16 text-center">
+          <div className="bg-base-900 rounded-3xl p-8 sm:p-16 text-center">
             <h2 className="text-3xl sm:text-4xl font-serif font-bold text-white mb-6">Let's work together.</h2>
-            <p className="text-stone-400 max-w-xl mx-auto mb-10 text-lg">
+            <p className="text-base-400 max-w-xl mx-auto mb-10 text-lg">
               I'm currently open to new opportunities. Feel free to reach out whether it's about work, a question, or just to say hi!
             </p>
             <div className="flex flex-wrap justify-center gap-4">
               <a 
                 href="mailto:pravadipta@gmail.com" 
-                className="flex items-center gap-2 px-6 py-3 bg-orange-700 text-white font-medium rounded-full hover:bg-orange-600 transition-colors"
+                className="flex items-center gap-2 px-6 py-3 bg-accent-700 dark:bg-accent-500 text-white font-medium rounded-full hover:bg-accent-800 dark:hover:bg-accent-400 transition-colors"
               >
                 <Mail className="w-5 h-5" />
                 Email
@@ -612,7 +612,7 @@ export default function App() {
                 href="https://linkedin.com/in/pravadipta" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 bg-stone-800 text-white font-medium rounded-full hover:bg-stone-700 transition-colors border border-stone-700"
+                className="flex items-center gap-2 px-6 py-3 bg-base-800 text-white font-medium rounded-full hover:bg-base-700 transition-colors border border-base-700"
               >
                 <Linkedin className="w-5 h-5" />
                 LinkedIn
@@ -621,7 +621,7 @@ export default function App() {
                 href="https://github.com/pravadipta" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center gap-2 px-6 py-3 bg-stone-800 text-white font-medium rounded-full hover:bg-stone-700 transition-colors border border-stone-700"
+                className="flex items-center gap-2 px-6 py-3 bg-base-800 text-white font-medium rounded-full hover:bg-base-700 transition-colors border border-base-700"
               >
                 <Github className="w-5 h-5" />
                 GitHub
@@ -633,7 +633,7 @@ export default function App() {
       </main>
       
       <ScrollToTop />
-      <footer className="border-t border-stone-200 bg-stone-100 dark:bg-stone-100 py-8 text-center text-stone-500 text-sm">
+      <footer className="border-t border-base-200 bg-base-100 dark:bg-base-100 py-8 text-center text-base-500 text-sm">
         <p>&copy; {new Date().getFullYear()} Pravadipta</p>
       </footer>
 
