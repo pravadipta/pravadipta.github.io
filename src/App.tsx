@@ -34,10 +34,12 @@ const projects = [
     deckUrl: "https://drive.google.com/file/d/1ggkw9-iwKb1TvtoEZiLg41t6mMec6720/view?usp=drive_link",
     tableauUrl: 'https://public.tableau.com/views/TheBreadBasketMBADashboard/BasketGrowthOpportunityDashboard?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link',
     details: {
-      businessContext: "A retail bakery recorded high transaction volume but low basket depth, with an average of ~2 items per purchase and 41.7% single-item transactions, limiting average order value.",
+      businessContext: "The Bread Basket, a retail bakery, recorded high transaction volume but low basket depth, with an average of ~2 items per purchase and 41.7% single-item transactions, limiting average order value.",
       objective: "Identify product combinations that can increase basket size and reduce single-item purchases.",
       data: "9,465 retail bakery transactions across 94 bakery products.",
       approach: "Exploratory data analysis and market basket analysis (Apriori) using Python to identify product associations based on support, confidence, and lift.",
+      dashboardImage: "/project1_dashboard.png",
+      dashboardCaption: "Interactive dashboard highlighting basket size distribution, product associations, and cross-selling opportunities.",
       keyInsights: "Food items such as toast and medialuna frequently trigger coffee add-ons, while beverage-and-dessert combinations appear more often during weekend visits.",
       businessRecommendations: "Promote weekday food-to-coffee add-ons and introduce optional beverage-and-dessert bundles on weekends to increase basket depth."
     }
@@ -56,6 +58,8 @@ const projects = [
       objective: "Design an interactive dashboard that helps users understand spending behavior, monitor budget utilization, and identify opportunities to improve financial management.",
       data: "Transaction-level expense data, merchant metadata, and category-level annual budgets.",
       approach: "Built an interactive Tableau dashboard combining spending metrics, category breakdowns, budget comparisons, and time-based trend analysis.",
+      dashboardImage: "project2_dashboard.png",
+      dashboardCaption: "Interactive dashboard tracking spending patterns, budget utilization, and key merchants.",
       keyInsights: "Several non-essential categories such as travel, subscriptions, and entertainment exceed their allocated budgets (~111% utilization), indicating recurring overspending risks.",
       businessRecommendations: "Introduce category-based alerts and forward-looking spending projections to help users detect overspending early and adjust financial behavior."
     }
@@ -69,7 +73,7 @@ const projects = [
     githubUrl: "https://github.com/pravadipta/customer-segmentation-analysis",
     deckUrl: "https://drive.google.com/file/d/1Gnv0nDU-_aGQssHfCjVPv77IWCyrEF3W/view?usp=drive_link",
     details: {
-      businessContext: "RevoBank earns revenue from credit card transactions through a 1.5% merchant discount rate, while fraudulent transactions create direct financial losses. Understanding customer spending behavior and risk profiles is essential to increase card usage while maintaining profitability.",
+      businessContext: "RevoBank generates revenue from credit card transactions but faces losses from fraud. Understanding customer behavior and risk profiles is key to increasing usage while maintaining profitability.",
       objective: "Analyze credit card performance and segment customers to identify high-value users and guide targeted growth strategies.",
       data: "Credit card transaction data and customer demographic information including income, credit score, and debt levels.",
       approach: "Data was cleaned and aggregated at the user level, followed by K-means clustering using behavioral and financial features such as transaction amount, transaction count, recency, credit limit, and debt-to-income ratio.",
@@ -86,26 +90,44 @@ const projects = [
     githubUrl: "",
     deckUrl: "https://drive.google.com/file/d/1N4g2M0rDZfkGobS8uB5fN9T2DDL4-zZ7/view?usp=drive_link",
     details: {
-      businessContext: "RevoGrocers is a grocery retail business operating across multiple locations and selling a wide range of products. The company collects detailed transactional sales data across products, categories, and customers, which can be analyzed to identify patterns in revenue generation and customer purchasing behavior.",
+      businessContext: "RevoGrocers collects detailed transactional data across products and customers, which can be analyzed to uncover revenue drivers and purchasing behavior patterns.",
       objective: "Analyze grocery sales transactions to identify top-performing product categories, understand key revenue drivers, and evaluate pricing and purchasing patterns.",
       data: "Simulated grocery sales dataset containing transactional records, product information, and category data from January 2018 to May 2018.",
       approach: "SQL queries were written in Google BigQuery to join relational tables (sales, products, and categories), calculate revenue after discounts, analyze category-level performance, and extract business insights from the data.",
       keyInsights: "Revenue differences between product categories were driven more by customer spending levels than by the number of customers purchasing the products.",
       businessRecommendations: "Strengthen high-performing categories such as Confections and Meat through cross-selling bundles, while reviewing pricing and product positioning for weaker categories like Grain to improve sales performance."
     }
-  }
+  },
+  {
+    id: 5,
+    title: "Campaign Performance Evaluation",
+    summary: "Analyzed campaign performance and tested a new product page design to improve revenue efficiency and transaction value.",
+    image: "/project5.jpg",
+    tags: ["Google Sheets", "A/B Testing", "EDA", "Data Cleaning"],
+    githubUrl: "",
+    deckUrl: "https://drive.google.com/file/d/1hC4pBk1HuumI9zOZ7JLVGgNvVUL1y31e/view?usp=sharing",
+    spreadsheetsUrl: "https://docs.google.com/spreadsheets/d/1NnNTLIrhVCb5rYdQjDs7Ar7f1dpz8TGY_duUbYsDoQ4/edit?usp=drive_link",
+    details: {
+      businessContext: "RevoGrocers collects detailed transactional data across products and customers, which can be analyzed to uncover revenue drivers and purchasing behavior patterns.",
+      objective: "Evaluate campaign performance to identify the most efficient strategy for maximizing revenue, and assess whether a new product page design significantly increases transaction value.",
+      data: "E-commerce transaction data across three campaign periods, including revenue, discount, quantity, and customer-level data.",
+      approach: "Performed data cleaning and exploratory analysis in Google Sheets, used pivot tables to compare campaign performance and category-level metrics, and conducted A/B testing using a two-sample t-test to evaluate product page impact.",
+      keyInsights: "Campaign 12/12 achieved the highest revenue-to-discount ratio, indicating the most efficient use of promotional budget. The new product page design significantly increased transaction value, with statistically significant results (p < 0.05).",
+      businessRecommendations: "Adopt the 12/12 campaign strategy to improve promotional efficiency, optimize discount allocation across categories, and roll out the new product page design to drive higher transaction value and revenue."
+    }
+  },
 ];
 
 const technicalSkills = [
   { name: "Python", desc: "Data cleaning, analysis, and statistical modeling using libraries such as Pandas and Scikit-learn.", icon: <BrainCircuit className="w-5 h-5 text-accent-700 dark:text-accent-500" /> },
-  { name: "SQL", desc: "Querying relational databases and extracting business insights, with experience in Google BigQuery.", icon: <Database className="w-5 h-5 text-accent-700 dark:text-accent-500" /> },
+  { name: "SQL", desc: "Querying relational databases, with experience in Google BigQuery.", icon: <Database className="w-5 h-5 text-accent-700 dark:text-accent-500" /> },
   { name: "Spreadsheets", desc: "Data manipulation, pivot tables, and reporting in Microsoft Excel and Google Sheets.", icon: <Table className="w-5 h-5 text-accent-700 dark:text-accent-500" /> },
-  { name: "Tableau", desc: "Building interactive dashboards and communicating insights visually.", icon: <BarChart className="w-5 h-5 text-accent-700 dark:text-accent-500" /> },
+  { name: "Data Visualization", desc: "Building interactive dashboards, primarily using Tableau and Power BI.", icon: <BarChart className="w-5 h-5 text-accent-700 dark:text-accent-500" /> },
 ];
 
 const softSkills = [
   { name: "Analytical Thinking", desc: "Breaking down complex problems into structured analysis.", icon: <Lightbulb className="w-5 h-5 text-base-600" /> },
-  { name: "Insight Communication", desc: "Translating analytical findings into clear, actionable insights for business decisions.", icon: <MessageSquare className="w-5 h-5 text-base-600" /> },
+  { name: "Insight Communication", desc: "Translating analytical findings into actionable insights for business decisions.", icon: <MessageSquare className="w-5 h-5 text-base-600" /> },
   { name: "Data Storytelling", desc: "Presenting findings in a clear, accessible way for technical and non-technical audiences.", icon: <Presentation className="w-5 h-5 text-base-600" /> },
   { name: "Collaborative Communication", desc: "Communicating effectively across diverse cultural and professional environments.", icon: <Users className="w-5 h-5 text-base-600" /> },
 ];
@@ -182,7 +204,7 @@ function ProjectModal({ project, onClose }: { project: typeof projects[0], onClo
                 ))}
               </div>
 
-              {(project.githubUrl || project.deckUrl || project.tableauUrl) && (
+              {(project.githubUrl || project.deckUrl || project.spreadsheetsUrl || project.tableauUrl) && (
                 <div className="flex flex-wrap gap-3">
                   {project.githubUrl && (
                     <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-base-800 text-white text-sm font-medium rounded-lg hover:bg-base-700 transition-colors">
@@ -191,13 +213,19 @@ function ProjectModal({ project, onClose }: { project: typeof projects[0], onClo
                     </a>
                   )}
                   {project.deckUrl && (
-                    <a href={project.deckUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-slate-200 dark:bg-slate-500/30 text-slate-700 dark:text-slate-300 text-sm font-medium rounded-lg hover:bg-slate-300 dark:hover:bg-slate-500/40 transition-colors">
+                    <a href={project.deckUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-amber-100 dark:bg-amber-500/20 text-amber-800 dark:text-amber-200 text-sm font-medium rounded-lg hover:bg-amber-200 dark:hover:bg-amber-500/30 transition-colors">
                       <Presentation className="w-4 h-4" />
                       View Deck
                     </a>
                   )}
+                  {project.spreadsheetsUrl && (
+                    <a href={project.spreadsheetsUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-emerald-100 dark:bg-emerald-500/20 text-emerald-800 dark:text-emerald-200 text-sm font-medium rounded-lg hover:bg-emerald-200 dark:hover:bg-emerald-500/30 transition-colors">
+                      <Table className="w-4 h-4" />
+                      View Spreadsheets
+                    </a>
+                  )}
                   {project.tableauUrl && (
-                    <a href={project.tableauUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-blue-200 dark:bg-blue-500/20 text-blue-900 dark:text-blue-300 text-sm font-medium rounded-lg hover:bg-blue-100 transition-colors">
+                    <a href={project.tableauUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 px-4 py-2 bg-blue-100 dark:bg-blue-500/20 text-blue-800 dark:text-blue-300 text-sm font-medium rounded-lg hover:bg-blue-200 transition-colors">
                       <BarChart className="w-4 h-4" />
                       View Tableau
                     </a>
@@ -219,7 +247,7 @@ function ProjectModal({ project, onClose }: { project: typeof projects[0], onClo
 
             <div>
               <h3 className="text-sm font-semibold text-base-400 uppercase tracking-wider mb-2">Data & Approach</h3>
-              <div className="bg-base-50 rounded-xl p-5 space-y-4 border border-base-200">
+              <div className="bg-base-100 rounded-xl p-5 space-y-4 border border-base-200">
                 <div>
                   <span className="font-medium text-base-900 block mb-1">Data Sources:</span>
                   <p className="text-base-700 text-sm">{project.details.data}</p>
@@ -230,6 +258,22 @@ function ProjectModal({ project, onClose }: { project: typeof projects[0], onClo
                 </div>
               </div>
             </div>
+
+            {(project.details as any).dashboardImage && (
+              <div className="space-y-3">
+                <img 
+                  src={(project.details as any).dashboardImage} 
+                  alt={(project.details as any).dashboardCaption || "Dashboard screenshot"} 
+                  className="w-full h-auto border border-stone-200 shadow-sm"
+                  referrerPolicy="no-referrer"
+                />
+                {(project.details as any).dashboardCaption && (
+                  <p className="text-xs text-stone-500 text-center italic">
+                    {(project.details as any).dashboardCaption}
+                  </p>
+                )}
+              </div>
+            )}
 
             <div className="grid gap-6 sm:grid-cols-2">
               <div className="bg-accent-50/50 dark:bg-accent-500/5 rounded-xl p-5 border border-accent-100 dark:border-accent-500/20">
@@ -443,7 +487,7 @@ export default function App() {
           <div className="space-y-16">
             <div className="mb-12">
               <h2 className="text-sm font-bold text-base-400 uppercase tracking-widest mb-4">Skills & Tools</h2>
-              <p className="text-xl text-base-600 max-w-2xl">A summary of the technical tools and professional competencies I bring to every project.</p>
+              <p className="text-lg text-base-600 max-w-xl">A summary of the technical tools and professional competencies I bring to every project.</p>
             </div>
             
             <div className="grid md:grid-cols-2 gap-12">
@@ -470,7 +514,7 @@ export default function App() {
                   {softSkills.map(skill => (
                     <div key={skill.name} className="bg-white p-5 rounded-2xl border border-base-200 shadow-sm hover:shadow-md transition-shadow">
                       <div className="flex items-center gap-3 mb-2">
-                        <div className="p-2 bg-base-50 rounded-lg">
+                        <div className="p-2 bg-base-100 rounded-lg">
                           {skill.icon}
                         </div>
                         <h4 className="font-medium text-base-900">{skill.name}</h4>
@@ -488,7 +532,7 @@ export default function App() {
         <section className="scroll-mt-24">
           <div className="mb-12">
             <h2 className="text-sm font-bold text-base-400 uppercase tracking-widest mb-4">Certifications</h2>
-            <p className="text-xl text-base-600 max-w-2xl">Certifications I've earned while continuing to grow and develop as a data analyst.</p>
+            <p className="text-lg text-base-600 max-w-xl">Certifications I've earned while continuing to grow and develop as a data analyst.</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
@@ -523,7 +567,7 @@ export default function App() {
         <section id="projects" className="scroll-mt-24">
           <div className="mb-12">
             <h2 className="text-sm font-bold text-base-400 uppercase tracking-widest mb-4">Selected Work</h2>
-            <p className="text-xl text-base-600 max-w-2xl">A collection of my recent data analysis projects, highlighting my approach to solving business problems.</p>
+            <p className="text-lg text-base-600 max-w-xl">A collection of my recent data analysis projects, highlighting my approach to solving business problems.</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -572,7 +616,7 @@ export default function App() {
         <section className="scroll-mt-24">
           <div className="mb-12">
             <h2 className="text-sm font-bold text-base-400 uppercase tracking-widest mb-4">What people say</h2>
-            <p className="text-xl text-base-600 max-w-2xl">From people I've worked with and learned from along the way.</p>
+            <p className="text-lg text-base-600 max-w-xl">From people I've worked with and learned from along the way.</p>
           </div>
           
           <div className="grid md:grid-cols-2 gap-6">
